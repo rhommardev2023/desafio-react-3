@@ -1,75 +1,81 @@
-import { useNavigate  } from "react-router-dom";
-import { MdEmail, MdLock, MdPerson, MdPhone } from 'react-icons/md'
-import { Button } from '../../components/Button';
-import { Header } from '../../components/Header';
-import { Input } from '../../components/Input';
-import { api } from '../../services/api';
+mport styled from 'styled-components';
 
-import { useForm } from "react-hook-form";
+export const Container = styled.main`
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+    margin-top: 120px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`
+
+export const Wrapper = styled.div`
+    max-width: 300px;
+`
+
+export const Column = styled.div`
+    flex: 1;
+`
+
+export const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+`
 
 
-import { Container, Title, Column, TitleLogin, SubtitleLogin, Text, LoginText, Row, Wrapper } from './styles';
 
-const Cadastro = () => {
+export const Title = styled.h2`
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    max-width: 90%;
+    margin-bottom: 20px;
+    line-height: 44px;
 
-    const navigate = useNavigate()
+    color: #FFFFFF;
+`
 
-    const { control, handleSubmit, formState: { errors  } } = useForm({
-        reValidateMode: 'onChange',
-        mode: 'onChange',
-    });
+export const TitleLogin = styled.p`
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 44px;
+    margin-bottom: 8px;
+`
 
-    const onSubmit = async (formData) => {
-        try{
-            const {data} = await api.get(`/users?email=${formData.email}&senha=${formData.senha}`);
-            
-            if(data.length && data[0].id){
-                navigate('/feed') 
-                return
-            }
+export const SubtitleLogin = styled.p`
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    margin-bottom: 35px;
+`
 
-            alert('Usuário ou senha inválido')
-        }catch(e){
-            
-        }
-    };
 
-    console.log('errors', errors);
+export const Text  = styled.p`
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-size: 12px;
+    line-height: 19px;
 
-    return (<>
-        <Header />
-        <Container>
-            <Column>
-                <Title>A plataforma para você aprender com experts, dominar as principais tecnologias
-                 e entrar mais rápido nas empresas mais desejadas.</Title>
-            </Column>
-            <Column>
-                <Wrapper>
-                <TitleLogin>Comece agora grátis</TitleLogin>
-                <SubtitleLogin>crie sua conta e make the change._</SubtitleLogin>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <Input placeholder="Nome completo" leftIcon={<MdPerson />} name="nomecompleto"  control={control} />
-                    {errors.nome && <span>O nome é obrigatório</span>}
-                    <Input placeholder="E-mail" leftIcon={<MdEmail />} name="email"  control={control} />
-                    {errors.email && <span>E-mail é obrigatório</span>}
-                    <Input type="celular" placeholder="Celular" leftIcon={<MdPhone />}  name="celular" control={control} />
-                    {errors.celular && <span>Celular é obrigatório</span>}
-                    <Input type="password" placeholder="Senha" leftIcon={<MdLock />}  name="senha" control={control} />
-                    {errors.senha && <span>Senha é obrigatório</span>}
-                    <Button title="CRIAR MINHA CONTA GRÁTIS" variant="secondary" type="submit"/>
-                </form>
-                <Row>
-                    <Text>Ao clicar em "criar minha conta grátis", declaro que aceito as Políticas de Privacidade e os Termos de Uso da DIO.</Text>
-                </Row>
-                <Row>
-                    <LoginText>Já tenho conta. <a href='/login'>Fazer login.</a>
-                    </LoginText>
-                    
-                </Row>
-                </Wrapper>
-            </Column>
-        </Container>
-    </>)
-}
+    color: #FFFFFF;
+` 
 
-export { Cadastro }
+export const LoginText =  styled.p`
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+
+    color: #FFFFFFF;
+`
